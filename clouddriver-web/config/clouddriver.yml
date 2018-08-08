@@ -1,0 +1,94 @@
+server:
+  port: 7002
+  ssl:
+    enabled: false
+
+mhc:
+  enabled: true
+  accounts:
+    - name: name1
+      address: address1
+      username: user1
+      password: pwd1
+    - name: name2
+      address: address2
+      username: user2
+      password: pwd2
+
+redis:
+  connection: redis://109.105.30.176:6379
+  scheduler: default
+  parallelism: -1
+
+services:
+  front50:
+    baseUrl: http://services.gcloud.srcb.com:25078
+
+management.health.elasticsearch.enabled: false
+
+swagger:
+  enabled: true
+  title: clouddriver
+  description: Cloud read and write operations
+  contact: admin@host.net
+  patterns:
+    - .*elasticIps.*
+    - .*cache.*
+    - .*instance.*
+    - .*search.*
+    - .*security.*
+    - .*vpcs.*
+    - .*credentials.*
+    - .*networks.*
+    - .*subnets.*
+    - .*ops.*
+    - .*task.*
+    - .*applications.*
+    - .*kubernetes.*
+    - .*instances.*
+    - .*reports.*
+    - .*docker.*
+    - .*job.*
+    - .*process.*
+    - .*ceres.*
+    - .*test.*
+    - .*config.*
+
+default:
+  # legacyServerPort is a non-ssl listener, if ssl is enabled. -1 to disable
+  legacyServerPort: -1
+  account:
+    env: default
+
+dockerRegistry:
+  enabled: ${DOCKER_REGISTRY_ENABLED:false}
+  accounts:
+    - name: dockerhub
+      address: https://registry.bst-1.cns.bstjpc.com:5000
+      insecureRegistry: true
+      repositories:
+        - library/ubuntu
+        - cloudpi/potal-frontend
+        - cloudpi/potal-backend
+        - cloudpi/huangtian
+
+spring:
+  jackson:
+    mapper:
+      SORT_PROPERTIES_ALPHABETICALLY: true
+    serialization:
+      ORDER_MAP_ENTRIES_BY_KEYS: true
+
+operations.security:
+  onMissingSecuredCheck: WARN
+  onMissingValidator: WARN
+
+---
+
+spring:
+  profiles: prod
+
+---
+
+spring:
+  profiles: local

@@ -1,0 +1,12 @@
+dependencies {
+    spinnaker.group('jackson')
+
+    compile spinnaker.dependency('kork')
+    compile spinnaker.dependency('slf4j')
+    compile project(':cats:cats-core')
+
+    compile "com.netflix.spinnaker.fiat:fiat-api:0.29.0-rc.1-springBoot154"
+    compile spinnaker.dependency('frigga')
+
+    testCompile project(':cats:cats-test')
+}
